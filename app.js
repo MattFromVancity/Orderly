@@ -34,6 +34,6 @@ app.post('*', (req, res) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.listen(port,() => {
-    console.log(`Orderly App is running @ http://localhost:${port}`);
+app.listen(process.env.PORT,() => {
+    console.log(`Orderly App is running @ ${process.env.HOST}:${port}`);
 });
