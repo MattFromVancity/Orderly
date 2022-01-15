@@ -14,6 +14,7 @@ var overviewRoutes = require('./routes/overview_routes');
 //App Instantiation
 const app = express();
 const port = 2022;
+const host = "shopifychallenge2022.herokuapp.com";
 var session_config = {
     secret: 'aSecret',
     saveUninitialized: true,
@@ -46,6 +47,6 @@ app.post('*', (req, res) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.listen(port, () => {
+app.listen(port, host, () => {
     console.log(`Orderly App is running @ http://localhost:${port}`);
 });
