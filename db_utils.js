@@ -1,9 +1,9 @@
 //Preparation of mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://127.0.0.1/orderlyDB';
+var mongoDB_creds = 'mongodb+srv://test_user:test_user@cluster0.jmkhl.mongodb.net/orderlyDB?retryWrites=true&w=majority';
 
 //Create an connection instance with local database
-mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
+mongoose.connect(mongoDB_creds, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
