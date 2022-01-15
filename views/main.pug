@@ -1,0 +1,96 @@
+doctype html
+
+head
+    title Orderly
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet")
+    style
+     include ../public/main.css
+body
+    h1 Welcome to Orderly
+    if errors 
+        for error in errors
+            div(class='errorSection') 
+                span(onclick="this.parentElement.style.display= 'none';") #{error.msg} &times
+                p
+    h2 Add an Item
+    form(method='POST' action='/items/item_create')
+        input(type='text' name='item_name' placeholder='Enter Item Name' required)
+        br
+        input(type='text' name='item_id' placeholder='Enter Item SKU' required)
+        br
+        input(type='text' name='item_price' placeholder='Enter Item Price ($0.00)' min=0 required)
+        br
+        input(type='submit' value='Add Item')
+    if(item_list.length > 0)
+     h3 Inventory Items
+     table
+      tr
+       th Item Name 
+       th Item ID 
+       th Item Price 
+      each item in item_list
+       tr
+        td #{item.item_name}
+        td #{item.item_id} 
+        td #{item.price}
+        td(class="updateBtns")
+         form(action='/items/item_update', method='POST')
+          input(type="hidden" value=item.item_id name='item_id')
+          input(type="hidden" value=item.item_name name='item_name')
+          input(type="hidden" value=item.price.toString()  name='item_price')
+          input(type="submit" onclick="confirm('A global item update modifies all associated warehouse items!')" value="Update")
+        td
+         form(action='/items/item_delete' method='POST')
+          input(type='hidden' value=item.item_id name='item_id')
+          input(type='submit' value='Delete')
+    br
+    h2 Add a Warehouse
+    form(action='/warehouse/warehouse_create', method='POST')
+        input(name='warehouse_name' placeholder='Enter Warehouse Name' required)
+        br
+        input(name='warehouse_id' placeholder='Enter Warehouse ID' required)
+        br
+        input(name='street_name' placeholder='Enter Street Name' required)
+        br
+        input(type='number' name='street_number' placeholder='Enter Street Number' required)
+        br
+        input(name='postal_code' placeholder='Enter Postal/Zip Code' required)
+        br
+        input(name='country' placeholder='Enter Country' required)
+        br
+        input(type='submit' value='Add Warehouse')
+    br
+    if(warehouse_list.length > 0)
+     h3 Active Warehouses 
+     table 
+      tr
+       th Warehouse Name
+       th Warehouse ID
+      each warehouse in warehouse_list
+       tr
+        td #{warehouse.warehouse_name}
+        td #{warehouse.warehouse_id}
+        td 
+         form(action='/warehouse/warehouse_inventory' method='GET')
+          input(type='hidden' value=warehouse.warehouse_id name='warehouse_id')
+          input(type='submit' value='Manage Warehouse')
+        if(item_list.length > 0)
+         td
+          form(action='/warehouse/warehouse_add_item' method="POST")
+           select(name="item_id")
+            for item in item_list 
+             option(value=item.item_id) #{item.item_name}
+            br
+            input(type="number" value="1" placeholder="1" name="item_count" min=1)
+            input(type="hidden" value=warehouse.warehouse_id name="warehouse_id")
+            input(type="submit" value="Add Item to Warehouse")
+footer
+ p &copy 2022 Matt Whitehead
+ p
+  a(href='https://www.linkedin.com/in/mbwhiteh/') LinkedIn | 
+  a(href='https://github.com/MattFromVancity') Git
+ p Built Using: 
+  a(href='https://getbootstrap.com/') Bootstrap | 
+  a(href='https://nodejs.org/en/') NodeJS | 
+  a(href='https://expressjs.com/') Express | 
+  a(href='https://mongoosejs.com/') Mongoose

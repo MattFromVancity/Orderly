@@ -1,0 +1,47 @@
+body {
+    text-align: center;
+    margin: 10px;
+}
+
+form {
+    text-align: center;
+    margin: 0.5rem;
+    background-color: white;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+}
+
+input, button, select {
+    margin: 0.25rem;
+    border-radius: 0.25rem;
+    border-color: gray;
+    background-color: whitesmoke;
+    border-width: 0.1em;
+    border-style: solid;
+}
+
+table {
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    content: center;
+    text-align: center;
+}
+
+td {
+    padding: 2px;
+    margin: 0px;
+    border: 2px solid whitesmoke;
+}
+
+#warehouse_delete {
+    background-color: white;
+}
+
+a{
+    text-decoration: none;
+}
+
+footer {
+    margin-top: 20px;
+}
