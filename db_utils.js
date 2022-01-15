@@ -1,6 +1,6 @@
 //Preparation of mongoose connection
 var mongoose = require('mongoose');
-var mongoDB_creds = 'mongodb+srv://test_user:test_user@cluster0.jmkhl.mongodb.net/orderlyDB?retryWrites=true&w=majority';
+var mongoDB_creds = 'mongodb+srv://<ENTER_SUPPLIED_USERNAME>:<ENTER_SUPPLIED_PASSWORD>@cluster0.jmkhl.mongodb.net/orderlyDB?retryWrites=true&w=majority';
 
 //Create an connection instance with local database
 mongoose.connect(mongoDB_creds, { useNewUrlParser: true , useUnifiedTopology: true});
@@ -13,7 +13,7 @@ const MAX_ITEM_REMOVAL = -1;
 //Error handling for async controllers
 function handleErrors(err, req){
     console.error(`${err}`);
-    console.log('errors', [{msg: 'Internal Server Error. Please try again!'}]);
+    req.flash('errors', [{msg: 'Internal Server Error. Please try again!'}]);
 }
 
 //Adds an item to a warehouse instance
