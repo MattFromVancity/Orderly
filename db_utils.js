@@ -1,9 +1,11 @@
 //Preparation of mongoose connection
 var mongoose = require('mongoose');
-var mongoDB_creds = 'mongodb+srv://<ENTER_SUPPLIED_USERNAME>:<ENTER_SUPPLIED_PASSWORD>@cluster0.jmkhl.mongodb.net/orderlyDB?retryWrites=true&w=majority';
+
+//PLEASE MODIFY THIS WITH SUPPLIED CREDENTIALS
+var mongoDB = "<replace_with_credentials>";
 
 //Create an connection instance with local database
-mongoose.connect(mongoDB_creds, { useNewUrlParser: true , useUnifiedTopology: true});
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
