@@ -7,11 +7,6 @@ head
      include ../public/main.css
 body
     h1 Welcome to Orderly
-    if errors 
-        for error in errors
-            div(class='errorSection') 
-                span(onclick="this.parentElement.style.display= 'none';") #{error.msg} &times
-                p
     h2 Add an Item
     form(method='POST' action='/items/item_create')
         input(type='text' name='item_name' placeholder='Enter Item Name' required)

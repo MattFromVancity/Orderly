@@ -12,7 +12,6 @@ exports.get_all_data = async (req, res) => {
     });
     res.render('main', {
         warehouse_list: warehouses,
-        item_list: items,
-        errors: ["Internal Error"]
+        item_list: items
     });
 };
