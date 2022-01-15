@@ -13,7 +13,7 @@ const MAX_ITEM_REMOVAL = -1;
 //Error handling for async controllers
 function handleErrors(err, req){
     console.error(`${err}`);
-    req.flash('errors', [{msg: 'Internal Server Error. Please try again!'}]);
+    console.log('errors', [{msg: 'Internal Server Error. Please try again!'}]);
 }
 
 //Adds an item to a warehouse instance
