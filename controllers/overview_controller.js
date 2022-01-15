@@ -4,7 +4,6 @@ const db_utility = require('../db_utils');
 
 //Controller to retrieve all data for the overview page
 exports.get_all_data = async (req, res) => {
-    
     const items = await InventoryItemModel.find({}, 'item_name item_id price').catch((err) => {
         if(err) db_utility.handleErrors(err, req);
     });
@@ -14,6 +13,6 @@ exports.get_all_data = async (req, res) => {
     res.render('main', {
         warehouse_list: warehouses,
         item_list: items,
-        errors: req.flash('errors')
+        errors: ["Internal Error"]
     });
 };

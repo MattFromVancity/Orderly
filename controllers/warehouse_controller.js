@@ -7,8 +7,9 @@ const {warehouseAddItems, warehouseRemoveItems, handleErrors} = require('../db_u
 //Function to retrive all item within a warehouse
 exports.warehouse_inventory = (req, res) => {
     const warehouse_id= req.query.warehouse_id;
+    var error_arr;
     Warehouse.findOne({'warehouse_id': warehouse_id}, ['warehouse_name', 'warehouse_items'], (err, data) => {
-        if(err) handleErrors(err, req);
+        if(err) handleErrors(err, error_arr);
         res.render('warehouse_inventory', {
             'warehouse_name': data.warehouse_name,
             'warehouse_items': data.warehouse_items,
@@ -28,7 +29,6 @@ exports.warehouse_create = [body('warehouse_name', 'Warehouse name must be a Str
         const errors= validationResult(req);
         //Form validation errors
         if(!errors.isEmpty()){
-            req.flash('errors', errors.array());
             res.redirect('/');
         }
         //Only one warehouse_id may exist
@@ -38,7 +38,6 @@ exports.warehouse_create = [body('warehouse_name', 'Warehouse name must be a Str
         
         //If warehouse_id exists return an error else create an Address entry and Warehouse entry sequentially.
         if(result){
-            req.flash('errors', [{'msg': 'The Warehouse ID entered already exists!'}]);
             res.redirect('/');
         }else {
             const addres_q = Address.create({

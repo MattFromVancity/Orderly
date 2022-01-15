@@ -10,8 +10,6 @@ exports.item_create = [ body('item_name', 'Item Name is required.').isLength({'m
     (req, res) => {
     var errors = validationResult(req);
     if(!errors.isEmpty()){
-        console.log(errors.array());
-        req.flash('errors', errors.array());
         res.redirect('/');
     }else {
         //Verify the item does not already exist in the DB
@@ -19,7 +17,6 @@ exports.item_create = [ body('item_name', 'Item Name is required.').isLength({'m
             if(err) throw err;
             if(items.length > 0){
                 console.log(`${items[0].item_name} already exists in database with item_id = ${items[0].item_id}`);
-                req.flash('errors', [{ msg:`${items[0].item_name} already exists with item_id = ${items[0].item_id} in the Orderly database. Please retry!`}]);
                 res.redirect('/');
             }else{
                 InventoryItem.create({

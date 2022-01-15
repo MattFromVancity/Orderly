@@ -1,8 +1,6 @@
 //Preparation of mongoose connection
 var mongoose = require('mongoose');
-
-//PLEASE MODIFY THIS WITH SUPPLIED CREDENTIALS
-var mongoDB = "<replace_with_credentials>";
+var mongoDB = process.env.MONGODB_URI;
 
 //Create an connection instance with local database
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
@@ -15,7 +13,6 @@ const MAX_ITEM_REMOVAL = -1;
 //Error handling for async controllers
 function handleErrors(err, req){
     console.error(`${err}`);
-    req.flash('errors', [{msg: 'Internal Server Error. Please try again!'}]);
 }
 
 //Adds an item to a warehouse instance

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A simple inventory tracking system for Shopify Summer 2022 Internship Challenge!",
   "main": "app.js",
+  "private": true,
   "dependencies": {
     "async": "^3.2.2",
     "connect-flash": "^0.1.1",
